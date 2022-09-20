@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1 Sign Up!
+  form(method='post' action='')
+    label First Name: 
+      input#first-name(type='text' name='first-name' required)
+    label Last Name: 
+      input#last-name(type='text' name='last-name' required)
+    label Password: 
+      input#password(type='text' name='password' required)
+    label Confirm Password: 
+      input#confirm-password(type='text' name='confirm-password' required)
+    button(type='submit') Register
