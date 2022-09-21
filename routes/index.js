@@ -7,6 +7,9 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 
+// handle user sign up
+router.post("/", userController.userCreatePost);
+
 // get log-in form
 router.get("/log-in", userController.userLogInGet);
 
