@@ -1,8 +1,9 @@
 const User = require("../models/user");
 const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
 
 exports.userCreatePost = [
-  body("first-name", "First name must not be empty")
+  body("firstName", "First name must not be empty")
     .trim()
     .isLength({ min: 1 })
     .escape(),
@@ -10,7 +11,7 @@ exports.userCreatePost = [
     .trim()
     .isLength({ min: 2 })
     .escape(),
-  body("last-name", "Last name must not be empty")
+  body("lastName", "Last name must not be empty")
     .trim()
     .isLength({ min: 1 })
     .escape(),
@@ -18,13 +19,22 @@ exports.userCreatePost = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("confirm-password", "Must not be empty and must match password")
+  body("confirmPassword", "Must not be empty and must match password")
     .trim()
     .custom((value, { req }) => value === req.body.password)
     .isLength({ min: 1 })
     .escape(),
   (req, res, next) => {
     const errors = validationResult(req);
+    bcrypt.hash(req.body.password, 8, (err, hash) => {
+      const user = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        username: req.body.username,
+        membership: false,
+        password: hash,
+      });
+    });
   },
 ];
 

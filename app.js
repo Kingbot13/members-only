@@ -8,6 +8,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const session = require("express-session");
 const User = require("./models/user");
+const bcrypt = require("bcryptjs");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -28,9 +29,15 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "incorrect username" });
       }
-      if (user.password !== password) {
-        return done(null, false, { message: "incorrect password" });
-      }
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res) {
+          // user successfully logged in
+          return done(null, user);
+        } else {
+          return done(null, false, { message: "incorrect password" });
+        }
+      });
+
       return done(null, user);
     });
   })
