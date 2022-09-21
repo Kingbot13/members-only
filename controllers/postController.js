@@ -10,7 +10,7 @@ exports.postHomeGet = (req, res, next) => {
           User.findOne({ username: req.user.username }).exec(callback);
         },
         posts(callback) {
-          Post.find().exec(callback);
+          Post.find().populate("user").exec(callback);
         },
       },
       (err, results) => {
