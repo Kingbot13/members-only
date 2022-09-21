@@ -1,0 +1,10 @@
+extends layout 
+
+block content 
+    h1 Log-In 
+    form(method='post' action='')
+        label Email: 
+            input#username(type='email' name='username')
+        label Password: 
+            input#password(type='password' name='password')
+        button(type='submit') Log-In
