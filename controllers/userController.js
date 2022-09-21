@@ -35,10 +35,16 @@ exports.userCreatePost = [
         membership: false,
         password: hash,
       });
-      user.save(err => {
+      if (!errors.isEmpty()) {
+        res.render("index", { user });
+      }
+      if (err) {
+        return next(err);
+      }
+      user.save((err) => {
         if (err) return next(err);
-        res.redirect('/');
-      })
+        res.redirect("/");
+      });
     });
   },
 ];
@@ -68,27 +74,30 @@ exports.userLogInPost = [
 // get member pass page
 exports.memberPassGet = (req, res, next) => {
   if (req.user) {
-
-    res.render('memberPass');
+    res.render("memberPass");
   } else {
-    res.redirect('/');
+    res.redirect("/");
   }
-}
+};
 
 // handle member pass post
 exports.memberPassPost = [
-  body('passcode', 'passcode must not be empty')
-  .trim()
-  .isLength({min: 1})
-  .custom((value) => value === "potato")
-  .withMessage('wrong, try again!')
-  .escape(),
+  body("passcode", "passcode must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .custom((value) => value === "potato")
+    .withMessage("wrong, try again!")
+    .escape(),
   (req, res, next) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) res.render('memberPass');
-    User.findOneAndUpdate({username: req.user.username}, {membership: true}, (err, theUser) => {
-      if (err) next(err);
-      res.redirect('/messages');
-    })
-  }
-]
+    if (!errors.isEmpty()) res.render("memberPass");
+    User.findOneAndUpdate(
+      { username: req.user.username },
+      { membership: true },
+      (err, theUser) => {
+        if (err) next(err);
+        res.redirect("/posts");
+      }
+    );
+  },
+];

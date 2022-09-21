@@ -13,4 +13,10 @@ router.get("/log-in", userController.userLogInGet);
 // log-in post
 router.post("/log-in", userController.userLogInPost);
 
+// get member passcode page
+router.get("/member-passcode", userController.memberPassGet);
+
+// post member passcode page
+router.post("/member-passcode", userController.memberPassPost);
+
 module.exports = router;
