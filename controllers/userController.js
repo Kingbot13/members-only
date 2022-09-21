@@ -32,3 +32,20 @@ exports.userCreatePost = [
 exports.userLogInGet = (req, res, next) => {
   res.render("logIn");
 };
+
+// handle log-in post
+exports.userLogInPost = [
+  body("username", "email must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("password", "password must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  passport.authenticate("local", {
+    // send to index while testing auth. Replace routes when done testing auth
+    successRedirect: "/",
+    failureRedirect: "/",
+  }),
+];

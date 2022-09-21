@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const userController = require('../controllers/userController');
+const userController = require("../controllers/userController");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -9,5 +9,8 @@ router.get("/", function (req, res, next) {
 
 // get log-in form
 router.get("/log-in", userController.userLogInGet);
+
+// log-in post
+router.post("/log-in", userController.userLogInPost);
 
 module.exports = router;
