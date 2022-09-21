@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 exports.userCreatePost = [
   body("firstName", "First name must not be empty")
@@ -34,6 +35,10 @@ exports.userCreatePost = [
         membership: false,
         password: hash,
       });
+      user.save(err => {
+        if (err) return next(err);
+        res.redirect('/');
+      })
     });
   },
 ];
