@@ -20,7 +20,7 @@ exports.postHomeGet = (req, res, next) => {
         }
         res.render("posts", {
           user: results.user,
-          posts: results.post,
+          posts: results.posts,
         });
       }
     );
