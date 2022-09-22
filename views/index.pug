@@ -4,13 +4,13 @@ block content
   h1 Sign Up!
   form(method='post' action='')
     label First Name: 
-      input#first-name(type='text' name='firstName' required)
+      input#first-name(type='text' name='firstName' required value=(undefined===user ? '' : user.firstName))
     label Last Name: 
-      input#last-name(type='text' name='lastName' required)
+      input#last-name(type='text' name='lastName' required value=(undefined===user ? '' : user.lastName))
     label Email: 
-      input#username(type='email' name='username' required)
+      input#username(type='email' name='username' required value=(undefined===user ? '' : user.username))
     label Password: 
-      input#password(type='text' name='password' required)
+      input#password(type='text' name='password' required value=(undefined===user ? '' : user.password))
     label Confirm Password: 
       input#confirm-password(type='text' name='confirmPassword' required)
     button(type='submit') Register

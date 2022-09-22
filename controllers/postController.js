@@ -56,6 +56,7 @@ exports.postHomePost = [
           res.render("posts", {
             user: results.user,
             posts: results.posts,
+            post,
           });
         }
         post.save((err) => {

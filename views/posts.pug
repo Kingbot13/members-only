@@ -4,10 +4,10 @@ block content
     h1 View or create posts 
     form(method="" action='')
         label Title: 
-            input#title(type='text' name='title')
+            input#title(type='text' name='title' value=(undefined===post ? '' : post.title))
         label Write Post 
-            textarea#post(name="post")
-        input#user.hidden(type='hidden' name='user' value=user.id)
+            textarea#post(name="post") #{undefined===post ? '' : post.content}
+        input#user(type='hidden' name='user' value=user.id)
         button Submit 
     hr
     if posts

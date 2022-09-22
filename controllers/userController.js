@@ -66,8 +66,8 @@ exports.userLogInPost = [
     .escape(),
   passport.authenticate("local", {
     // send to index while testing auth. Replace routes when done testing auth
-    successRedirect: "/",
-    failureRedirect: "/",
+    successRedirect: "/member-passcode",
+    failureRedirect: "/log-in",
   }),
 ];
 
