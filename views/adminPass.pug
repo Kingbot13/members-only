@@ -1,0 +1,11 @@
+extends layout 
+
+block content
+  h1 Access the club or go to messages page 
+  form(method="post" action='')
+    label Admin Passcode: 
+      input#passcode(type='text' name='passcode')
+    button(type='submit') submit
+  hr
+  a(href='/')
+    button Go To Messages 

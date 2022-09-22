@@ -33,6 +33,12 @@ router.get("/member-passcode", userController.memberPassGet);
 // post member passcode page
 router.post("/member-passcode", userController.memberPassPost);
 
+// get admin passcode page
+router.get('/admin-passcode', userController.adminPassGet)
+
+// post admin passcode page
+router.post('/admin-passcode', userController.adminPassPost);
+
 // get posts page
 router.get("/posts", postController.postHomeGet);
 

@@ -84,3 +84,36 @@ exports.memberPassPost = [
     );
   },
 ];
+
+// get admin pass page
+exports.adminPassGet = (req, res, next) => {
+  if (req.user) {
+    res.render('adminPass');
+  } else {
+    res.redirect('/');
+  }
+
+}
+
+// handle admin pass post
+exports.adminPassPost = [
+  body("passcode", "passcode must not be empty")
+  .trim()
+  .isLength({ min: 1 })
+  .custom((value) => value === "potatoAdmin")
+  .withMessage("wrong, try again!")
+  .escape(),
+(req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) res.render("adminPass");
+  User.findOneAndUpdate(
+    { username: req.user.username },
+    { admin: true },
+    (err, theUser) => {
+      if (err) next(err);
+      res.redirect("/posts");
+    }
+  );
+},
+
+]
