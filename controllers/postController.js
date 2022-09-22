@@ -34,6 +34,14 @@ exports.postHomePost = [
   body("title", "title must not be empty").trim().isLength({ min: 1 }).escape(),
 
   (req, res, next) => {
+    const errors = validationResult(req);
+    const post = new Post({
+      user: req.user.id,
+      title: req.body.title,
+      date: new Date(),
+      content: req.body.post,
+    });
+
     async.parallel(
       {
         user(callback) {
@@ -44,14 +52,10 @@ exports.postHomePost = [
         },
       },
       (err, results) => {
-        const errors = validationResult(req);
-        if (err) return next();
-        const post = new Post({
-          user: results.user._id,
-          title: req.body.title,
-          date: new Date(),
-          content: req.body.post,
-        });
+        if (err) {
+          return next(err);
+        }
+
         if (!errors.isEmpty()) {
           res.render("posts", {
             user: results.user,
@@ -60,7 +64,9 @@ exports.postHomePost = [
           });
         }
         post.save((err) => {
-          if (err) return next();
+          if (err) {
+            return next(err);
+          }
           res.redirect("/posts");
         });
       }
