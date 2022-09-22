@@ -3,8 +3,11 @@ extends layout
 block content 
     h1 View or create posts 
     form(method="" action='')
+        label Title: 
+            input#title(type='text' name='title')
         label Write Post 
             textarea#post(name="post")
+        input#user.hidden(type='hidden' name='user' value=user.id)
         button Submit 
     hr
     if posts

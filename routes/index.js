@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const userController = require("../controllers/userController");
+const postController = require("../controllers/postController");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -21,5 +22,11 @@ router.get("/member-passcode", userController.memberPassGet);
 
 // post member passcode page
 router.post("/member-passcode", userController.memberPassPost);
+
+// get posts page
+router.get("/posts", postController.postHomeGet);
+
+// handle posts post
+router.post("/posts", postController.postHomePost);
 
 module.exports = router;
