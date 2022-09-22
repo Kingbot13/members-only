@@ -7,7 +7,7 @@ block content
             input#title(type='text' name='title' value=(undefined===post ? '' : post.title))
         label Write Post 
             textarea#post(name="post") #{undefined===post ? '' : post.content}
-        input#user(type='hidden' name='user' value=user.id)
+        input#user(type='hidden' name='user' value=(undefined===user.id ? user._id : user.id))
         button Submit 
     hr
     if posts
