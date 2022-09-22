@@ -43,7 +43,7 @@ exports.userCreatePost = [
       }
       user.save((err) => {
         if (err) return next(err);
-        res.redirect("/");
+        res.redirect("/member-passcode");
       });
     });
   },
@@ -53,23 +53,6 @@ exports.userCreatePost = [
 exports.userLogInGet = (req, res, next) => {
   res.render("logIn");
 };
-
-// handle log-in post
-exports.userLogInPost = [
-  body("username", "email must not be empty")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  body("password", "password must not be empty")
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-  passport.authenticate("local", {
-    // send to index while testing auth. Replace routes when done testing auth
-    successRedirect: "/member-passcode",
-    failureRedirect: "/log-in",
-  }),
-];
 
 // get member pass page
 exports.memberPassGet = (req, res, next) => {

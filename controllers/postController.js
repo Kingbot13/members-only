@@ -61,6 +61,7 @@ exports.postHomePost = [
         }
         post.save((err) => {
           if (err) return next();
+          res.redirect("/posts");
         });
       }
     );

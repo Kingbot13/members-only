@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const userController = require("../controllers/userController");
 const postController = require("../controllers/postController");
+const passport = require("passport");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -15,7 +16,16 @@ router.post("/", userController.userCreatePost);
 router.get("/log-in", userController.userLogInGet);
 
 // log-in post
-router.post("/log-in", userController.userLogInPost);
+router.post(
+  "/log-in",
+  passport.authenticate("local", {
+    failureRedirect: "/log-in",
+    failureMessage: true,
+  }),
+  function (req, res) {
+    res.redirect("/member-passcode");
+  }
+);
 
 // get member passcode page
 router.get("/member-passcode", userController.memberPassGet);
