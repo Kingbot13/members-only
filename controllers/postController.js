@@ -73,3 +73,42 @@ exports.postHomePost = [
     );
   },
 ];
+
+// get delete post form
+exports.deletePostGet = (req, res, next) => {
+  if (req.user) {
+    Post.findById(req.params.id).exec((err, post) => {
+      if (err) {
+        return next(err);
+      }
+      res.render("deletePost", {
+        post: post,
+      });
+    });
+  } else {
+    res.redirect("/");
+  }
+};
+
+// handle post delete
+exports.deletePostPost = (req, res, next) => {
+  if (req.user) {
+    User.findOne({ username: req.user.username }).exec((err, user) => {
+      if (err) {
+        return next(err);
+      }
+      if (user.membership && user.admin) {
+        Post.findByIdAndRemove(req.params.id, (err) => {
+          if (err) {
+            return next(err);
+          }
+          res.redirect("/posts");
+        });
+      } else {
+        res.redirect("/posts");
+      }
+    });
+  } else {
+    res.redirect("/");
+  }
+};

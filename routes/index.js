@@ -34,15 +34,21 @@ router.get("/member-passcode", userController.memberPassGet);
 router.post("/member-passcode", userController.memberPassPost);
 
 // get admin passcode page
-router.get('/admin-passcode', userController.adminPassGet)
+router.get("/admin-passcode", userController.adminPassGet);
 
 // post admin passcode page
-router.post('/admin-passcode', userController.adminPassPost);
+router.post("/admin-passcode", userController.adminPassPost);
 
 // get posts page
 router.get("/posts", postController.postHomeGet);
 
 // handle posts post
 router.post("/posts", postController.postHomePost);
+
+// get message delete form
+router.get("/posts/:id/delete", postController.deletePostGet);
+
+// handle delete form post
+router.post("/posts/:id/delete", postController.deletePostPost);
 
 module.exports = router;

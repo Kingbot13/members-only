@@ -16,6 +16,10 @@ block content
                 li 
                     if user.membership 
                         div #{post.user.firstName} #{post.user.lastName}
+                            if user.admin 
+                                a(href='/posts/'+post._id+'/delete')
+                                    button Delete post
+
                         div #{post.date} 
                     div #{post.content}         
     else 
