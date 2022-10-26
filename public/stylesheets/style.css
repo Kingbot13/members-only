@@ -1,8 +1,39 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #E9D2C0;
 }
 
 a {
   color: #00B7FF;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  min-width: 350px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+input {
+  margin: 0 8px;
+}
+
+.sign-in-btn {
+  background-color: #EE5622;
+  color: white;
+  border: none;
+  
+
+}
+
+.log-in-btn {
+  background-color: transparent;
 }

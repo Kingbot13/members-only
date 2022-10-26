@@ -13,8 +13,8 @@ block content
       input#password(type='text' name='password' required value=(undefined===user ? '' : user.password))
     label Confirm Password: 
       input#confirm-password(type='text' name='confirmPassword' required)
-    button(type='submit') Register
+    button.sign-in-btn(type='submit') Register
   hr
   h2 Or Log-in 
   a(href='/log-in')
-    button Log-In Page
+    button.log-in-btn Log-In Page
